@@ -1,0 +1,70 @@
+.container
+  .row
+    .col-sm-6.col-sm-offset-3
+      .panel.panel-default
+        .panel-heading
+          %b Tarea
+        .panel-body
+          La tarea consiste en la implementación de un "Autocomplete" para los campos en el panel abajo. Se deben cumplir
+          las siguientes condiciones:
+          %ul
+            %li
+              El campo
+              %b RUT
+              y
+              %b Apellido
+              deben tener autocomplete
+            %li
+              Al seleccionar un elemento del autocomplete se deben
+              %b llenar los otros campos
+              con los datos asociados
+            %li
+              El autocomplete
+              %b NO
+              debe
+              %b pre-cargar
+              los datos, si no obtener los propuestas del servidor (por ejemplo vía JSON)
+            %li
+              En la lista de propuestas del autocomplete deben aparecer siempre
+              %b todos los datos
+              (nombre, apellido y RUT).
+              Por ejemplo: Si uno escribe "24" en el campo RUT, deberían aparecer dos propuestas:
+              %ul
+                %li 24486602-6 (Adelmaro Fonseca Naranjo)
+                %li 24000339-2 (Xaviera Ramón Cerda)
+            %li
+              El autocomplete también debe devolver
+              %b resultados
+              si el usuario busca
+              %b por el segundo apellido
+      .panel.panel-default
+        .panel-heading
+          %b Datos personales
+        .panel-body
+
+          = form_tag do
+            .row
+              .col-xs-12
+                .form-group
+                  %label RUT:
+                  = text_field_tag(:rut, "", class: "form-control")
+                .form-group
+                  %label Nombre:
+                  = text_field_tag(:nombre, "", class: "form-control")
+                .form-group
+                  %label Apellido:
+                  = text_field_tag(:apellido, "", class: "form-control")
+
+      .panel.panel-default
+        .panel-heading
+          %b Contenido de la BDD
+        .panel-body
+          %i
+            Los datos que se desplieguen aquí están pensado solamente como ayuda para saber que datos están en la BDD
+            y no deben ser accedidos (vía JavaScript) para realizar el autocomplete
+        %table.table.table-striped
+          - @entries.each do |e|
+            %tr
+              %td= e.rut
+              %td= e.nombre
+              %td= e.apellido
